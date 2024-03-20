@@ -48,9 +48,9 @@ const drumPlayers = new Tone.Players({
         waterdrop: './assets/drum/waterdrop-drum.mp3',
         traploop: './assets/drum/trap-loop.mp3',
         bonfire: './assets/drum/bonfire-drum.wav',
-        embrace: './assets/drum/embrace.mp3',
+        // embrace: './assets/drum/embrace.mp3',
     }
-});
+})
 
 const naturePlayers = new Tone.Players({
     urls: {
@@ -62,9 +62,9 @@ const naturePlayers = new Tone.Players({
 
 const talkingPlayers = new Tone.Players({
     urls: {
-        record: './assets/begin-again.wav',
-        easier: './assets/easier.mp3',
-        sunrise: './assets/before-sunrise.mp3',
+        chaos: './assets/dialogue/chaos.mp3',
+        whatareyou: './assets/dialogue/whatareyou.mp3',
+        adopted: './assets/dialogue/adopted.mp3',
         vinyl: './assets/vinyl.wav'
     }
 });
@@ -77,7 +77,6 @@ const aiPlayers = new Tone.Players({
     }
 });
 
-// ===============Effects=======================
 const chordsVol = new Tone.Volume(-5);
 const chordsReverb = new Tone.Reverb(1.5, 0.01, 0.8);
 chordSampler_bass.chain(chordsVol, chordsReverb, Tone.Destination);
@@ -115,50 +114,62 @@ const chordPatterns = {
         ['6:1:0', 'C5'],
         ['6:2:0', 'G5'],
         ['6:3:2', 'F5'],
+        // chord progression
         ['0:0:0', 'Gb2'],
         ['0:0:1', 'Bb2'],
         ['0:0:2', 'Db3'],
         ['0:0:3', 'F3'],
+
         ['0:1:0', 'Gb2'],
         ['0:1:0', 'Bb2'],
         ['0:1:0', 'Db3'],
         ['0:1:0', 'F3'],
+        
         ['1:0:0', 'Gb2'],
         ['1:0:1', 'Bb2'],
         ['1:0:2', 'Db3'],
         ['1:0:3', 'F3'],
+
         ['1:1:0', 'Gb2'],
         ['1:1:0', 'Bb2'],
         ['1:1:0', 'Db3'],
         ['1:1:0', 'F3'],
+
         ['2:0:0', 'Db3'],
         ['2:0:1', 'F3'],
         ['2:0:2', 'Ab3'],
-        ['2:0:3', 'C4'],        
+        ['2:0:3', 'C4'],
+        
         ['2:1:0', 'Db3'],
         ['2:1:0', 'F3'],
         ['2:1:0', 'Ab3'],
-        ['2:1:0', 'C4'],        
+        ['2:1:0', 'C4'],
+        
         ['3:0:0', 'Db3'],
         ['3:0:1', 'F3'],
         ['3:0:2', 'Ab3'],
-        ['3:0:3', 'C4'],        
+        ['3:0:3', 'C4'],
+        
         ['3:1:0', 'Db3'],
         ['3:1:0', 'F3'],
         ['3:1:0', 'Ab3'],
         ['3:1:0', 'C4'],
+
         ['4:0:0', 'F3'],
         ['4:0:1', 'A3'],
         ['4:0:2', 'C4'],
         ['4:0:3', 'Eb4'],
+
         ['4:1:0', 'F3'],
         ['4:1:0', 'A3'],
         ['4:1:0', 'C4'],
         ['4:1:0', 'Eb4'],
+
         ['5:0:0', 'F3'],
         ['5:0:1', 'Ab3'],
         ['5:0:2', 'C4'],
-        ['5:0:3', 'Eb4'],        
+        ['5:0:3', 'Eb4'],
+        
         ['5:1:0', 'F3'],
         ['5:1:0', 'Ab3'],
         ['5:1:0', 'C4'],
@@ -178,75 +189,60 @@ const chordPatterns = {
         ['7:0:1', 'Eb3'],
         ['7:0:2', 'G3'],
         ['7:0:3', 'Bb3'],
+        
         ['7:1:0', 'C3'],
         ['7:1:0', 'Eb3'],
         ['7:1:0', 'G3'],
         ['7:1:0', 'Bb3'],
+        
     ],
-    festin: [
-        ['0:0:0', 'G5'],
+    chilling: [
+        ['0:0:0', 'E5'],
+        ['0:0:2', 'G5'],
         ['0:1:0', 'F5'],
-        ['0:3:0', 'Eb5'],
-        ['1:0:0', 'G5'],
-        ['1:1:0', 'F5'],
-        ['1:3:0', 'Eb5'],
+        ['0:1:2', 'E5'],
+        ['0:2:0', 'D5'],
+        ['0:2:2', 'C5'],
+        ['0:3:0', 'C5'],
+        ['0:3:2', 'E5'],
+        ['1:0:0', 'G4'],
+        ['1:0:2', 'A4'],
+        ['1:1:0', 'G4'],
+        ['1:1:2', 'F4'],
+        ['1:2:0', 'E4'],
+        ['1:2:2', 'C5'],
+        ['1:3:0', 'C5'],
+        ['1:3:2', 'E5'],
         ['2:0:0', 'G5'],
-        ['2:1:0', 'F5'],
-        ['2:3:0', 'Eb5'],
-        ['3:0:0', 'D5'],
-        ['4:0:0', 'Bb5'],
-        ['4:1:0', 'F5'],
-        ['4:3:0', 'Eb5'],
-        ['5:0:0', 'Bb5'],
-        ['5:1:0', 'D5'],
-        ['5:3:0', 'D5'],
-        ['6:0:0', 'Bb5'],
-        ['6:1:0', 'F5'],
-        ['6:3:0', 'D5'],
-        ['7:0:0', 'Eb5'],
-
-
-        // chord progression
-        ['0:0:0', 'Eb3'],
-        ['0:0:1', 'G3'],
-        ['0:0:2', 'Bb3'],
-        ['0:0:3', 'Db4'],
-    
-        ['1:0:0', 'C3'],
-        ['1:0:1', 'Eb3'],
-        ['1:0:2', 'G3'],
-
-
-        ['2:0:0', 'F3'],
-        ['2:0:1', 'Ab3'],
-        ['2:0:2', 'C4'],
-
-        
-        ['3:0:0', 'Bb2'],
-        ['3:0:1', 'D3'],
-        ['3:0:2', 'F3'],
-
-        ['4:0:0', 'F3'],
-        ['4:0:1', 'A3'],
-        ['4:0:2', 'C4'],
-    
-        ['5:0:0', 'Bb2'],
-        ['5:0:1', 'D3'],
-        ['5:0:2', 'F3'],
-
-        ['6:0:0', 'G3'],
-        ['6:0:1', 'Bb3'],
-        ['6:0:2', 'D4'],
-        ['6:0:3', 'F4'],
-        
-        ['7:0:0', 'C3'],
-        ['7:0:1', 'Eb3'],
-        ['7:0:2', 'G3'],
-
-
-
+        ['2:0:2', 'F5'],
+        ['2:1:0', 'E5'],
+        ['2:1:2', 'D5'],
+        ['2:2:0', 'C5'],
+        ['2:2:2', 'C5'],
+        ['2:3:0', 'E5'],
+        ['2:3:2', 'G5'],
+        ['3:0:0', 'G5'],
+        ['3:0:2', 'F5'],
+        ['3:1:0', 'E5'],
+        ['3:1:2', 'D5'],
+        ['3:2:0', 'C5'],
+        ['3:2:2', 'C5'],
+        ['3:3:0', 'E5'],
+        ['3:3:2', 'G5'],
+        ['4:0:0', 'G5'],
+        ['4:0:2', 'F5'],
+        ['4:1:0', 'E5'],
+        ['4:1:2', 'D5'],
+        ['4:2:0', 'C5'],
+        ['4:2:2', 'C5'],
+        ['4:3:0', 'E5'],
+        ['4:3:2', 'G5'],
+        ['5:0:0', 'G5'],
+        ['5:0:2', 'F5'],
+        ['5:1:0', 'E5'],
     ],
     seeYouAgain: [
+        // melody
         ['0:0:0', 'E#5'],['0:0:2', 'D#5'],['0:1:0', 'C#5'],['0:1:2', 'D#5'],['0:2:0', 'E#5'],
         ['1:0:2', 'C#5'],['1:1:0', 'A#4'],['1:1:2', 'C#5'],['1:2:0', 'A#4'],['1:2:2', 'C#5'],['1:3:0', 'A#4'],['1:3:2', 'C#5'],
         ['2:0:0', 'E#5'],['2:0:2', 'C#5'],
@@ -256,6 +252,9 @@ const chordPatterns = {
         ['6:0:0', 'E#5'],['6:1:2', 'E#5'],['6:2:2', 'E#5'],['6:3:0', 'D#5'],['6:3:2', 'C5'],
         ['7:0:0', 'C#5'],
 
+        
+        // chord progression
+        // F#maj7, measure 1 and 5
         ['0:0:0', 'F#2'],
         ['0:0:1', 'A#2'],
         ['0:0:2', 'C#3'],
@@ -344,15 +343,12 @@ const drumPatterns = {
     waterdrop: [
         ['0:0:0', 'waterdrop']
     ],
-    traploop: [
-        ['0:0:0', 'traploop']
+    groovy: [
+        ['0:0:0', 'groovy']
     ],
     bonfire: [
         ['0:0:0', 'bonfire']
-    ],
-    embrace: [
-        ['0:0:0', 'embrace']
-    ],
+    ]
 };
 
 const naturePatterns = {
@@ -368,9 +364,9 @@ const naturePatterns = {
 };
 
 const talkingPatterns = {
-    record: [['4:0:0', 'record'], ['4:0:0', 'vinyl']],
-    easier: [['4:0:0', 'easier'], ['4:0:0', 'vinyl']],
-    sunrise: [['4:0:0', 'sunrise'], ['4:0:0', 'vinyl']]
+    chaos: [['4:0:0', 'chaos'], ['4:0:0', 'vinyl']],
+    whatareyou: [['4:0:0', 'whatareyou'], ['4:0:0', 'vinyl']],
+    adopted: [['4:0:0', 'adopted'], ['4:0:0', 'vinyl']]
 };
 
 const aiPatterns = {
@@ -389,7 +385,7 @@ const patternDefaults = {
     chords: 'ylangYlang',
     drums: 'waterdrop',
     nature: 'wind',
-    talking: 'record',
+    talking: 'chaos',
     ai_track: 'lofi_400_1'
 };
 
@@ -465,7 +461,6 @@ const loadLoops = (selectedPatterns) => {
     }
 }
 
-
 const enableChord = () => {
     localStorage.setItem('enableChord', true);
     localStorage.setItem('enableAI', false);
@@ -488,6 +483,7 @@ const setDrums = (input) => {
 const setNatureSounds = (input) => {
     localStorage.setItem('nature', JSON.stringify(input));
     const backgroundImage = document.getElementById('background');
+
     switch (input) {
         case "wind":
             backgroundImage.style.backgroundImage = 'url(./assets/wind-1.gif)'; break
@@ -507,7 +503,7 @@ const setAITrack = (input) => {
 }
 
 const disableForm = () => {
-    const formElements = document.getElementById('form-input');
+    const formElements = document.getElementsByClassName('form-input');
     const formLabels = document.getElementsByClassName('form-heading');
     for (let i = 0; i < formElements.length; i++) {
         formElements[i].disabled = true;

@@ -15,79 +15,84 @@
 <body id="background" class="bg-wind fixed top-0 left-0 z-0 w-screen h-95v bg-cover">   
     <div id='main-screen' class="fixed top-0 left-0 z-1 w-screen h-screen">    
         <div class="flex flex-col justify-center items-center h-full">
-            <div class="max-w-md p-6 backdrop-blur-sm bg-white/30 border border-gray-200 rounded-lg shadow">
-                <form id='drums'>
-                    <h3 class="form-heading enabled mb-4 font-semibold text-white">Drums</h3>
+            <div class="max-w-xl p-6 backdrop-blur-sm bg-white/30 border border-gray-200 rounded-lg shadow">
+                
+                <form id='natureSounds'>
+                    <h3 class="form-heading enabled mb-4 font-bold text-black">THEME</h3>
                     <div class="flex flex-wrap">
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='waterdrop' name="drums" onchange="setDrums('waterdrop')" checked class="w-4 h-4 bg-gray-100 border-gray-300">
-                            <label for="red-radio" class="ms-2 text-md font-medium text-black">Waterdrop</label>
-                        </div>
-                        <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='groovy' name="drums" onchange="setDrums('traploop')" class="w-4 h-4 bg-gray-100 border-gray-300">
-                            <label for="green-radio" class="ms-2 text-md font-medium text-black">Trap Loop</label>
-                        </div>
-                        <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='bonfire' name="drums" onchange="setDrums('bonfire')" class="w-4 h-4 bg-gray-100 border-gray-300">
-                            <label for="purple-radio" class="ms-2 text-md font-medium text-black">Bonfire</label>
-                        </div>
-                        <div class="flex items-center me-4 mt-2">
-                            <input id="form-input" type="radio" value='embrace' name="drums" onchange="setDrums('embrace')" class="w-4 h-4 bg-gray-100 border-gray-300">
-                            <label for="purple-radio" class="ms-2 text-md font-medium text-black">Embrace</label>
-                        </div>
-                        <div class="flex items-center me-4 mt-2">
-                            <input id="form-input" type="radio" value='bonfire' name="drums" onchange="setDrums('bonfire')" class="w-4 h-4 bg-gray-100 border-gray-300">
-                            <label for="purple-radio" class="ms-2 text-md font-medium text-black">Bonfire</label>
-                        </div>
-                        <div class="flex items-center me-4 mt-2">
-                            <input id="form-input" type="radio" value='bonfire' name="drums" onchange="setDrums('bonfire')" class="w-4 h-4 bg-gray-100 border-gray-300">
-                            <label for="purple-radio" class="ms-2 text-md font-medium text-black">Bonfire</label>
-                        </div>
-                    </div>
-                </form>
-                <form id='natureSounds' class="mt-4">
-                    <h3 class="form-heading enabled mb-4 font-semibold text-gray-900 dark:text-white">Ambience</h3>
-                    <div class="flex flex-wrap">
-                        <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='wind' name='natureSounds' onchange="setNatureSounds('wind')" checked class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300">
+                            <input type="radio" value='wind' name='natureSounds' onchange="setNatureSounds('wind')" checked class="form-input w-4 h-4 text-red-600 bg-gray-100 border-gray-300">
                             <label for="red-radio" class="ms-2 text-md font-medium text-black">Wind</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='fireplace' name='natureSounds' onchange="setNatureSounds('fireplace')" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300">
+                            <input type="radio" value='fireplace' name='natureSounds' onchange="setNatureSounds('fireplace')" class="form-input w-4 h-4 text-green-600 bg-gray-100 border-gray-300">
                             <label for="green-radio" class="ms-2 text-md font-medium text-black">Fireplace</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='rain' name='natureSounds' onchange="setNatureSounds('rain')" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300">
+                            <input type="radio" value='rain' name='natureSounds' onchange="setNatureSounds('rain')" class="form-input w-4 h-4 text-purple-600 bg-gray-100 border-gray-300">
                             <label for="purple-radio" class="ms-2 text-md font-medium text-black">Rain</label>
                         </div>
                     </div>
                 </form>
-                <form id='talking' class="mt-4">
-                    <h3 class="form-heading enabled mb-4 font-semibold text-gray-900 dark:text-white">Quote</h3>
+
+                <form id='drums' class="mt-4">
+                    <h3 class="form-heading enabled mb-4 font-bold text-black">DRUMS</h3>
                     <div class="flex flex-wrap">
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='record' name='talking' onchange="setTalking('record')" checked class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300">
-                            <label for="red-radio" class="ms-2 text-md font-medium text-black">"keep rolling, it will be beautiful"</label>
+                            <input type="radio" value='waterdrop' name="drums" onchange="setDrums('waterdrop')" checked class="form-input w-4 h-4 bg-gray-100 border-gray-300">
+                            <label for="red-radio" class="ms-2 text-md font-medium text-black">Waterdrop</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='easier' name='talking' onchange="setTalking('easier')" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300">
-                            <label for="green-radio" class="ms-2 text-md font-medium text-black">"it will get easier"</label>
+                            <input type="radio" value='groovy' name="drums" onchange="setDrums('traploop')" class="form-input w-4 h-4 bg-gray-100 border-gray-300">
+                            <label for="green-radio" class="ms-2 text-md font-medium text-black">Trap Loop</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='sunrise' name='talking' onchange="setTalking('sunrise')" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300">
-                            <label for="purple-radio" class="ms-2 text-md font-medium text-black">"in between us"</label>
+                            <input type="radio" value='bonfire' name="drums" onchange="setDrums('bonfire')" class="form-input w-4 h-4 bg-gray-100 border-gray-300">
+                            <label for="purple-radio" class="ms-2 text-md font-medium text-black">Bonfire</label>
                         </div>
                     </div>
                 </form>
+                
+                <form id='talking' class="mt-4">
+                    <h3 class="form-heading enabled mb-4 text-md font-bold text-black">MOVIE DIALOGUES</h3>
+                    <div class="flex flex-wrap">
+                        <div class="flex items-center me-4">
+                            <input type="radio" value='chaos' name='talking' onchange="setTalking('chaos')" checked class="form-input w-4 h-4 text-red-600 bg-gray-100 border-gray-300">
+                            <label for="red-radio" class="ms-2 text-md font-medium justify-normal text-black">"What are we? A team? No, no, no, we're a chemical mixture that makes chaos. We're, we're a time bomb" - The Hulk</label>
+                        </div>
+                        <div class="flex items-center me-4 my-2">
+                            <input type="radio" value='whatareyou' name='talking' onchange="setTalking('whatareyou')" class="form-input w-4 h-4 text-green-600 bg-gray-100 border-gray-300">
+                            <label for="green-radio" class="ms-2 text-md font-medium text-black">"Take that off, what are you? Genius, billionaire, playboy, philanthropist." - Ironman</label>
+                        </div>
+                        <div class="flex items-center me-4">
+                            <input type="radio" value='adopted' name='talking' onchange="setTalking('adopted')" class="form-input w-4 h-4 text-purple-600 bg-gray-100 border-gray-300">
+                            <label for="purple-radio" class="ms-2 text-md font-medium text-black">"I don't think we should be focusing on Loki. That guy's brain is a bag full of cats. You can smell crazy on him." - Thor</label>
+                        </div>
+                        <!-- <div class="flex items-center me-4">
+                            <input type="radio" value='sunrise' name='talking' onchange="setTalking('sunrise')" class="form-input w-4 h-4 text-purple-600 bg-gray-100 border-gray-300">
+                            <label for="purple-radio" class="ms-2 text-md font-medium text-black">"I don't think we should be focusing on Loki. That guy's brain is a bag full of cats. You can smell crazy on him." - Thor</label>
+                        </div> -->
+                    </div>
+                </form>
+
+                <!-- <form id='talking' class="mt-4 columns-1 max-w-sm mx-auto">
+                <label for="countries" class="form-heading enabled block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value='record' name='talking' onchange="setTalking('record')" selected>"What are we? A team? No, no, no, we're a chemical mixture that makes chaos. We're, we're a time bomb" - The Hulk</option>
+                    <option value='easier' name='talking' onchange="setTalking('easier')">United States</option>
+                    <option value='sunrise' name='talking' onchange="setTalking('sunrise')">Canada</option>
+                </select>
+                </form> -->
+
                 <form id='soloist' class="mt-4 hidden">
                     <h3 class="form-heading enabled hidden mb-4 font-semibold text-gray-900 dark:text-white">AI Soloist</h3>
                     <div class="flex flex-wrap">
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='ai-true' name='ai' onchange="setAI('true')" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input type="radio" value='ai-true' name='ai' onchange="setAI('true')" class="form-input w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="red-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">on</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='ai-false' name='ai' onchange="setAI('false')" checked class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input type="radio" value='ai-false' name='ai' onchange="setAI('false')" checked class="form-input w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="green-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">off</label>
                         </div>
                     </div>
@@ -102,44 +107,44 @@
                     <h3 class="form-heading enabled hidden mb-4 font-semibold text-gray-900 dark:text-white">AI Generated Solo Track</h3>
                     <div class="flex flex-wrap">
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value="lofi_400_1" name="ai_track" onchange="setAITrack('lofi_400_1')" checked class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300">
+                            <input type="radio" value="lofi_400_1" name="ai_track" onchange="setAITrack('lofi_400_1')" checked class="form-input w-4 h-4 text-red-600 bg-gray-100 border-gray-300">
                             <label for="red-radio" class="ms-2 text-md font-medium text-black">worn tape piano</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value="lofi_200_1" name="ai_track" onchange="setAITrack('lofi_200_1')" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300">
+                            <input type="radio" value="lofi_200_1" name="ai_track" onchange="setAITrack('lofi_200_1')" class="form-input w-4 h-4 text-green-600 bg-gray-100 border-gray-300">
                             <label for="green-radio" class="ms-2 text-md font-medium text-black">music box</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value="lofi_400_2" name="ai_track" onchange="setAITrack('lofi_400_2')" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300">
+                            <input type="radio" value="lofi_400_2" name="ai_track" onchange="setAITrack('lofi_400_2')" class="form-input w-4 h-4 text-purple-600 bg-gray-100 border-gray-300">
                             <label for="purple-radio" class="ms-2 text-md font-medium text-black">dreamy smooth vox</label>
                         </div>
                     </div>
                 </form>
                 
                 <form id="chords" class="hidden mb-5">
-                    <h3 class="form-heading enabled hidden mb-4 font-semibold text-gray-900 dark:text-white">Chords</h3>
+                    <h3 id="chords" class="form-heading enabled hidden mb-4 font-semibold text-gray-900 dark:text-white">Chords</h3>
                     <div class="flex flex-wrap">
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='ylangYlang' name='chords' onchange="setChords('ylangYlang')" checked class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300">
+                            <input type="radio" value='ylangYlang' name='chords' onchange="setChords('ylangYlang')" checked class="form-input w-4 h-4 text-red-600 bg-gray-100 border-gray-300">
                             <label for="red-radio" class="ms-2 text-md font-medium text-black">ylang ylang</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio"  value='festin' name='chords' onchange="setChords('festin')" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300">
+                            <input type="radio"  value='festin' name='chords' onchange="setChords('festin')" class="form-input w-4 h-4 text-green-600 bg-gray-100 border-gray-300">
                             <label for="green-radio" class="ms-2 text-md font-medium text-black">la festin</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input id="form-input" type="radio" value='seeYouAgain' name='chords' onchange="setChords('seeYouAgain')" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300">
+                            <input type="radio" value='seeYouAgain' name='chords' onchange="setChords('seeYouAgain')" class="form-input w-4 h-4 text-purple-600 bg-gray-100 border-gray-300">
                             <label for="purple-radio" class="ms-2 text-md font-medium text-black">see you again</label>
                         </div>
                     </div>
                 </form>
 
                 <div id='buttons-wrapper'>
-                    <button id='start' type="button" onclick='enableChord()' class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">&#x25B7; play</button>
-                    <button id='stop' type="button" onclick='enableAI()' class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">&#x25A2; stop</button>
+                    <button id='start' type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">&#x25B7; play</button>
+                    <button id='stop' type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">&#x25A2; stop</button>
                 </div>
 
-                <a href="https://mtsandra.github.io/blog/2023/lofi-generator/" class="font-medium text-black hover:underline">how i made this</a><br>
+                <a href="" class="font-medium text-black hover:underline">how i made this</a><br>
             </div>
         </div>
         <div id='canvas' class="fixed bottom-0 bg-gray-900"></div>
