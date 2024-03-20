@@ -11,7 +11,7 @@ def get_notes():
     """Get all notes from the midi files"""
     notes = []
     for file in glob.glob("midi_songs/*.mid"):
-        # return a score
+        # get the list of all the notes and chords in the file
         midi = converter.parse(file)
         print("Training ===> %s" % file)
         parse_notes = None
@@ -22,7 +22,7 @@ def get_notes():
         except:
             # flattens all the objects(key, notes, etc.) into a single list
             parse_notes = midi.flat.notes
-    
+
         for i in parse_notes:
             if isinstance(i, note.Note):
                 # appends pitch of a single note extracted as a representation of MIDI pitch value, e.g 60
@@ -36,26 +36,28 @@ def get_notes():
 
     with open('data/notes', 'wb') as filepath:
         pickle.dump(notes, filepath)
-    
     return notes
-        
+
 def notes_sequences(notes, n_vocab):
     """Get sequences used by LSTM Network"""
+    sequence_length = 100
+    # get all pitch names
     pitchnames = sorted(set(item for item in notes))
     # create a dictionary to map pitches to integers
     note_to_int = dict((note, number) for number, note in enumerate(pitchnames))
     network_input = []
     network_output = []
 
-    for i in range(0, len(notes) - 1000, 1):
-        sequence_in = notes[i:i + 1000, 1]
-        sequence_out = notes[i + 1000]
+    for i in range(0, len(notes) - sequence_length, 1):
+        sequence_in = notes[i:i + sequence_length]
+        sequence_out = notes[i + sequence_length]
         network_input.append([note_to_int[char] for char in sequence_in])
         network_output.append([note_to_int[sequence_out]])
 
     n_patterns = len(network_input)
 
-    network_input = np.reshape(network_input, (n_patterns, 1000, 1))
+    # reshape the input into a format compatible with LSTM layers
+    network_input = np.reshape(network_input, (n_patterns, sequence_length, 1))
     # normalization
     network_input = network_input / float(n_vocab)
     network_output = to_categorical(network_output)

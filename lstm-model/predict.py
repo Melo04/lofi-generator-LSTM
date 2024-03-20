@@ -5,27 +5,42 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, LSTM, Activation, BatchNormalization
 
 ACCEPTABLE_NOTE = {
-    "sixteenth": 0.25,
     "eighth": 0.5,
     "quarter": 1,
-    "half": 2
+    "half": 2,
+    "16th": 0.25
 }
+
+def generate():
+    """ Generate a piano midi file """
+    with open('data/notes', 'rb') as filepath:
+        notes = pickle.load(filepath)
+
+    pitchnames = sorted(set(item for item in notes))
+    n_vocab = len(set(notes))
+
+    network_input, normalized_input = notes_sequences(notes, pitchnames, n_vocab)
+    model = lstm_model(normalized_input, n_vocab)
+    predictions = generate_notes(model, network_input, pitchnames, n_vocab)
+    create_midi(predictions)
 
 def notes_sequences(notes, pitchnames, n_vocab):
     """Get sequences used by LSTM Network"""
     note_to_int = dict((note, number) for number, note in enumerate(pitchnames))
+    sequence_length = 100
     network_input = []
     network_output = []
 
-    for i in range(0, len(notes) - 100, 1):
-        sequence_in = notes[i:i + 100]
-        sequence_out = notes[i + 100]
+    for i in range(0, len(notes) - sequence_length, 1):
+        sequence_in = notes[i:i + sequence_length]
+        sequence_out = notes[i + sequence_length]
+        # mapping each element in the sequence to an integer representation
         network_input.append([note_to_int[char] for char in sequence_in])
         network_output.append([note_to_int[sequence_out]])
 
     n_patterns = len(network_input)
-
-    normalized_input = np.reshape(network_input, (n_patterns, 100, 1)) / float(n_vocab)
+    normalized_input = np.reshape(network_input, (n_patterns, sequence_length, 1)) 
+    normalized_input = normalized_input / float(n_vocab)
     return (network_input, normalized_input)
 
 def lstm_model(network_input, n_vocab):
@@ -58,10 +73,13 @@ def generate_notes(model, network_input, pitchnames, n_vocab):
     pattern = network_input[start]
     prediction_output = []
     
+    # generate 500 notes
     for note_index in range(500):
-        prediction_output = np.reshape(pattern, (1, len(pattern), 1))
+        prediction_input = np.reshape(pattern, (1, len(pattern), 1))
+        # normalize input
         prediction_input = prediction_input / float(n_vocab)
         prediction = model.predict(prediction_input, verbose=0)
+        # returns the indices of the maximum values along an axis
         index = np.argmax(prediction)
         result = int_to_note[index]
         prediction_output.append(result)
@@ -87,31 +105,25 @@ def create_midi(prediction_output):
                 new_note = note.Note(int(current_note))
                 new_note.storedInstrument = instrument.Piano()
                 notes.append(new_note)
-            new_chord = chord.Chord(notes)
+            new_chord = chord.Chord(notes, type=chords_type)
             new_chord.offset = offset
             output_notes.append(new_chord)
+        elif str(pattern).upper() == "R":
+            chords_type = '16th'
+            new_rest = note.Rest(type=chords_type)
+            new_rest.offset = offset
+            output_notes.append(new_rest)
         else:
             new_note = note.Note(pattern, type=chords_type)
             new_note.offset = offset
             new_note.storedInstrument = instrument.Piano()
             output_notes.append(new_note)
         
+        # increase offset each iteration so that notes do not stack
         offset += ACCEPTABLE_NOTE[chords_type]
     
     midi_stream = stream.Stream(output_notes)
     midi_stream.write('midi', fp='test_output.mid')
-
-def generate():
-    with open('data/notes', 'rb') as filepath:
-        notes = pickle.load(filepath)
-
-    pitchnames = sorted(set(item for item in notes))
-    n_vocab = len(set(notes))
-
-    network_input, normalized_input = notes_sequences(notes, pitchnames, n_vocab)
-    model = lstm_model(normalized_input, n_vocab)
-    predictions = generate_notes(model, network_input, pitchnames, n_vocab)
-    create_midi(predictions)
 
 if __name__ == '__main__':
     generate()
