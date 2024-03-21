@@ -45,18 +45,20 @@ const guitarSampler = new Tone.Sampler({
 
 const drumPlayers = new Tone.Players({
     urls: {
-        waterdrop: './assets/drum/waterdrop-drum.mp3',
+        waterdrop: './assets/drum/waterdrop.mp3',
         traploop: './assets/drum/trap-loop.mp3',
-        bonfire: './assets/drum/bonfire-drum.wav',
-        // embrace: './assets/drum/embrace.mp3',
+        cricket: './assets/drum/cricket.wav',
+        heartbeat: './assets/drum/heartbeat.mp3',
     }
 })
 
 const naturePlayers = new Tone.Players({
     urls: {
         wind: './assets/wind.mp3',
-        fireplace: './assets/longerstorm.wav',
-        rain: './assets/rain.wav'
+        rain: './assets/rain.wav',
+        river: './assets/river.mp3',
+        fireplace: './assets/fireplace.mp3',
+        night: './assets/night.mp3',
     }
 });
 
@@ -65,7 +67,6 @@ const talkingPlayers = new Tone.Players({
         chaos: './assets/dialogue/chaos.mp3',
         whatareyou: './assets/dialogue/whatareyou.mp3',
         adopted: './assets/dialogue/adopted.mp3',
-        vinyl: './assets/vinyl.wav'
     }
 });
 
@@ -343,30 +344,39 @@ const drumPatterns = {
     waterdrop: [
         ['0:0:0', 'waterdrop']
     ],
-    groovy: [
-        ['0:0:0', 'groovy']
+    traploop: [
+        ['0:0:0', 'traploop']
     ],
-    bonfire: [
-        ['0:0:0', 'bonfire']
-    ]
+    cricket: [
+        ['0:0:0', 'cricket']
+    ],
+    heartbeat: [
+        ['0:0:0', 'heartbeat']
+    ],
 };
 
 const naturePatterns = {
     wind: [
         ['0:0:0', 'wind']
     ],
+    rain: [
+        ['0:0:0', 'rain']
+    ],
+    river: [
+        ['0:0:0', 'river']
+    ],
     fireplace: [
         ['0:0:0', 'fireplace']
     ],
-    rain: [
-        ['0:0:0', 'rain']
-    ]
+    night: [
+        ['0:0:0', 'night']
+    ],
 };
 
 const talkingPatterns = {
-    chaos: [['4:0:0', 'chaos'], ['4:0:0', 'vinyl']],
-    whatareyou: [['4:0:0', 'whatareyou'], ['4:0:0', 'vinyl']],
-    adopted: [['4:0:0', 'adopted'], ['4:0:0', 'vinyl']]
+    chaos: [['4:0:0', 'chaos'], ['4:0:0', 'chaos']],
+    whatareyou: [['4:0:0', 'whatareyou'], ['4:0:0', 'whatareyou']],
+    adopted: [['4:0:0', 'adopted'], ['4:0:0', 'adopted']]
 };
 
 const aiPatterns = {
@@ -487,10 +497,14 @@ const setNatureSounds = (input) => {
     switch (input) {
         case "wind":
             backgroundImage.style.backgroundImage = 'url(./assets/wind-1.gif)'; break
-        case "fireplace":
-            backgroundImage.style.backgroundImage = 'url(./assets/fireplace-at.gif)'; break
         case "rain":
-            backgroundImage.style.backgroundImage = 'url(./assets/sailor-rain.gif)'; break 
+            backgroundImage.style.backgroundImage = 'url(./assets/rain.gif)'; break 
+        case "river":
+            backgroundImage.style.backgroundImage = 'url(./assets/river-1.gif)'; break 
+        case "fireplace":
+            backgroundImage.style.backgroundImage = 'url(./assets/fireplace.gif)'; break
+        case "night":
+            backgroundImage.style.backgroundImage = 'url(./assets/midnight.gif)'; break
     }
 }
 
