@@ -6,32 +6,14 @@ const chordButtons = document.querySelectorAll("#chords");
 const aiButtons = document.querySelectorAll('#ai-track');
 const soloAnalyzer = new Tone.Waveform;
 
-const chordSampler = new Tone.Sampler({
+const naturePlayers = new Tone.Players({
     urls: {
-		"C4": "C4.mp3",
-		"D#4": "Ds4.mp3",
-		"F#4": "Fs4.mp3",
-		"A4": "A4.mp3",
-        "A0": "A0.mp3",
-        "A1": "A1.mp3",
-        "A2": "A2.mp3",
-        "A3": "A3.mp3",
-        "A4": "A4.mp3",
-        "A5": "A5.mp3",
-        "A6": "A6.mp3",
-	},
-	baseUrl: "https://tonejs.github.io/audio/salamander/",
-});
-
-const chordSampler_bass = new Tone.Sampler({
-    urls: {
-        'G1': './assets/bass-G1.mp3',
-        'G2': './assets/bass-G2.mp3',
-        'G3': './assets/bass-G3.mp3',
-        'G4': './assets/bass-G4.mp3',
-        'E2': './assets/bass-E2.mp3',
-        'A#4':'./assets/bass-As4.mp3'
-    },
+        wind: './assets/wind.mp3',
+        rain: './assets/rain.wav',
+        river: './assets/river.mp3',
+        fireplace: './assets/fireplace.mp3',
+        night: './assets/night.mp3',
+    }
 });
 
 const guitarSampler = new Tone.Sampler({
@@ -52,14 +34,32 @@ const drumPlayers = new Tone.Players({
     }
 })
 
-const naturePlayers = new Tone.Players({
+const chordSampler = new Tone.Sampler({
     urls: {
-        wind: './assets/wind.mp3',
-        rain: './assets/rain.wav',
-        river: './assets/river.mp3',
-        fireplace: './assets/fireplace.mp3',
-        night: './assets/night.mp3',
-    }
+		"C4": "C4.mp3",
+		"D#4": "Ds4.mp3",
+		"F#4": "Fs4.mp3",
+		"A4": "A4.mp3",
+        "A0": "A0.mp3",
+        "A1": "A1.mp3",
+        "A2": "A2.mp3",
+        "A3": "A3.mp3",
+        "A4": "A4.mp3",
+        "A5": "A5.mp3",
+        "A6": "A6.mp3",
+	},
+	baseUrl: "https://tonejs.github.io/audio/salamander/",
+});
+
+const chordSampler_bass = new Tone.Sampler({
+    urls: {
+        'G1': './assets/bass/bass-G1.mp3',
+        'G2': './assets/bass/bass-G2.mp3',
+        'G3': './assets/bass/bass-G3.mp3',
+        'G4': './assets/bass/bass-G4.mp3',
+        'E2': './assets/bass/bass-E2.mp3',
+        'A#4':'./assets/bass/bass-As4.mp3'
+    },
 });
 
 const talkingPlayers = new Tone.Players({
@@ -101,7 +101,6 @@ aiPlayers.chain(aiVol, Tone.Destination);
 
 const chordPatterns = {
     ylangYlang: [
-        // melody
         ['0:0:0', 'F4'],
         ['0:1:0', 'F4'],
         ['0:2:0','Eb4'],
@@ -115,135 +114,106 @@ const chordPatterns = {
         ['6:1:0', 'C5'],
         ['6:2:0', 'G5'],
         ['6:3:2', 'F5'],
-        // chord progression
         ['0:0:0', 'Gb2'],
         ['0:0:1', 'Bb2'],
         ['0:0:2', 'Db3'],
         ['0:0:3', 'F3'],
-
         ['0:1:0', 'Gb2'],
         ['0:1:0', 'Bb2'],
         ['0:1:0', 'Db3'],
         ['0:1:0', 'F3'],
-        
         ['1:0:0', 'Gb2'],
         ['1:0:1', 'Bb2'],
         ['1:0:2', 'Db3'],
         ['1:0:3', 'F3'],
-
         ['1:1:0', 'Gb2'],
         ['1:1:0', 'Bb2'],
         ['1:1:0', 'Db3'],
         ['1:1:0', 'F3'],
-
         ['2:0:0', 'Db3'],
         ['2:0:1', 'F3'],
         ['2:0:2', 'Ab3'],
         ['2:0:3', 'C4'],
-        
         ['2:1:0', 'Db3'],
         ['2:1:0', 'F3'],
         ['2:1:0', 'Ab3'],
         ['2:1:0', 'C4'],
-        
         ['3:0:0', 'Db3'],
         ['3:0:1', 'F3'],
         ['3:0:2', 'Ab3'],
         ['3:0:3', 'C4'],
-        
         ['3:1:0', 'Db3'],
         ['3:1:0', 'F3'],
         ['3:1:0', 'Ab3'],
         ['3:1:0', 'C4'],
-
         ['4:0:0', 'F3'],
         ['4:0:1', 'A3'],
         ['4:0:2', 'C4'],
         ['4:0:3', 'Eb4'],
-
         ['4:1:0', 'F3'],
         ['4:1:0', 'A3'],
         ['4:1:0', 'C4'],
         ['4:1:0', 'Eb4'],
-
         ['5:0:0', 'F3'],
         ['5:0:1', 'Ab3'],
         ['5:0:2', 'C4'],
         ['5:0:3', 'Eb4'],
-        
         ['5:1:0', 'F3'],
         ['5:1:0', 'Ab3'],
         ['5:1:0', 'C4'],
         ['5:1:0', 'Eb4'],
-
         ['6:0:0', 'Bb2'],
         ['6:0:1', 'D3'],
         ['6:0:2', 'F3'],
         ['6:0:3', 'Ab3'],
-
         ['6:1:0', 'Bb2'],
         ['6:1:0', 'D3'],
         ['6:1:0', 'F3'],
         ['6:1:0', 'Ab3'],
-
         ['7:0:0', 'C3'],
         ['7:0:1', 'Eb3'],
         ['7:0:2', 'G3'],
         ['7:0:3', 'Bb3'],
-        
         ['7:1:0', 'C3'],
         ['7:1:0', 'Eb3'],
         ['7:1:0', 'G3'],
         ['7:1:0', 'Bb3'],
-        
     ],
-    chilling: [
-        ['0:0:0', 'E5'],
-        ['0:0:2', 'G5'],
-        ['0:1:0', 'F5'],
-        ['0:1:2', 'E5'],
-        ['0:2:0', 'D5'],
-        ['0:2:2', 'C5'],
-        ['0:3:0', 'C5'],
-        ['0:3:2', 'E5'],
-        ['1:0:0', 'G4'],
-        ['1:0:2', 'A4'],
-        ['1:1:0', 'G4'],
-        ['1:1:2', 'F4'],
-        ['1:2:0', 'E4'],
-        ['1:2:2', 'C5'],
-        ['1:3:0', 'C5'],
-        ['1:3:2', 'E5'],
-        ['2:0:0', 'G5'],
-        ['2:0:2', 'F5'],
-        ['2:1:0', 'E5'],
-        ['2:1:2', 'D5'],
-        ['2:2:0', 'C5'],
-        ['2:2:2', 'C5'],
-        ['2:3:0', 'E5'],
-        ['2:3:2', 'G5'],
-        ['3:0:0', 'G5'],
-        ['3:0:2', 'F5'],
-        ['3:1:0', 'E5'],
-        ['3:1:2', 'D5'],
-        ['3:2:0', 'C5'],
-        ['3:2:2', 'C5'],
-        ['3:3:0', 'E5'],
-        ['3:3:2', 'G5'],
-        ['4:0:0', 'G5'],
-        ['4:0:2', 'F5'],
-        ['4:1:0', 'E5'],
-        ['4:1:2', 'D5'],
-        ['4:2:0', 'C5'],
-        ['4:2:2', 'C5'],
-        ['4:3:0', 'E5'],
-        ['4:3:2', 'G5'],
-        ['5:0:0', 'G5'],
-        ['5:0:2', 'F5'],
-        ['5:1:0', 'E5'],
+    raining: [
+        ['0:0:0', 'G1'],
+        ['0:0:1', 'D2'],
+        ['0:0:2', 'F#2'],
+        ['0:0:3', 'B2'],
+        ['0:0:4', 'D3'],
+        ['0:1:0', 'G1'],
+        ['0:1:0', 'D2'],
+        ['0:1:0', 'F#2'],
+        ['0:1:0', 'B2'],
+        ['0:1:0', 'D3'],
+        ['1:0:0', 'E2'],
+        ['1:0:1', 'G#2'],
+        ['1:0:2', 'A#2'],
+        ['1:0:3', 'D3'],
+        ['1:0:4', 'A#3'],
+        ['2:0:0', 'A1'],
+        ['2:0:1', 'E2'],
+        ['2:0:2', 'G2'],
+        ['2:0:3', 'C3'],
+        ['2:0:4', 'D3'],
+        ['2:1:0', 'A1'],
+        ['2:1:0', 'E2'],
+        ['2:1:0', 'G2'],
+        ['2:1:0', 'C3'],
+        ['2:1:0', 'D3'],
+        ['3:0:0', 'D2'],
+        ['3:0:0', 'C4'],
+        ['3:0:1', 'F#2'],
+        ['3:0:2', 'C3'],
+        ['3:0:3', 'D#3'],
+        ['3:0:4', 'F#3'],
+        ['3:2:0', 'G4']
     ],
     seeYouAgain: [
-        // melody
         ['0:0:0', 'E#5'],['0:0:2', 'D#5'],['0:1:0', 'C#5'],['0:1:2', 'D#5'],['0:2:0', 'E#5'],
         ['1:0:2', 'C#5'],['1:1:0', 'A#4'],['1:1:2', 'C#5'],['1:2:0', 'A#4'],['1:2:2', 'C#5'],['1:3:0', 'A#4'],['1:3:2', 'C#5'],
         ['2:0:0', 'E#5'],['2:0:2', 'C#5'],
@@ -252,91 +222,70 @@ const chordPatterns = {
         ['5:1:0', 'F#5'],['5:1:2', 'F#5'],['5:2:0', 'F#5'],['5:3:0', 'D#5'],
         ['6:0:0', 'E#5'],['6:1:2', 'E#5'],['6:2:2', 'E#5'],['6:3:0', 'D#5'],['6:3:2', 'C5'],
         ['7:0:0', 'C#5'],
-
-        
-        // chord progression
-        // F#maj7, measure 1 and 5
         ['0:0:0', 'F#2'],
         ['0:0:1', 'A#2'],
         ['0:0:2', 'C#3'],
         ['0:0:3', 'F3'],
-
         ['0:1:0', 'F#2'],
         ['0:1:0', 'A#2'],
         ['0:1:0', 'C#3'],
         ['0:1:0', 'F3'],
-
         ['4:0:0', 'F#2'],
         ['4:0:1', 'A#2'],
         ['4:0:2', 'C#3'],
         ['4:0:3', 'F3'],
-
         ['4:1:0', 'F#2'],
         ['4:1:0', 'A#2'],
         ['4:1:0', 'C#3'],
         ['4:1:0', 'F3'],
-
-        // D#m7, measure 2 and 6
         ['1:0:0', 'D#3'],
         ['1:0:1', 'F#3'],
         ['1:0:2', 'A#3'],
         ['1:0:3', 'C#4'],
-
         ['1:1:0', 'D#3'],
         ['1:1:0', 'F#3'],
         ['1:1:0', 'A#3'],
         ['1:1:0', 'C#4'],
-
         ['5:0:0', 'D#3'],
         ['5:0:1', 'F#3'],
         ['5:0:2', 'A#3'],
         ['5:0:3', 'C#4'],
-
         ['5:1:0', 'D#3'],
         ['5:1:0', 'F#3'],
         ['5:1:0', 'A#3'],
         ['5:1:0', 'C#4'],
-        // G#m7, measure 3 and 7
         ['2:0:0', 'G#2'],
         ['2:0:1', 'B2'],
         ['2:0:2', 'D#3'],
         ['2:0:3', 'F#3'],
-
         ['2:1:0', 'G#2'],
         ['2:1:0', 'B2'],
         ['2:1:0', 'D#3'],
         ['2:1:0', 'F#3'],
-
         ['6:0:0', 'G#2'],
         ['6:0:1', 'B2'],
         ['6:0:2', 'D#3'],
         ['6:0:3', 'F#3'],
-
         ['6:1:0', 'G#2'],
         ['6:1:0', 'B2'],
         ['6:1:0', 'D#3'],
         ['6:1:0', 'F#3'],
-        // G7, measure 4 and 8
         ['3:0:0', 'G2'],
         ['3:0:1', 'B2'],
         ['3:0:2', 'D3'],
         ['3:0:3', 'F3'],
-
         ['3:1:0', 'G2'],
         ['3:1:0', 'B2'],
         ['3:1:0', 'D3'],
         ['3:1:0', 'F3'],
-
         ['7:0:0', 'G2'],
         ['7:0:1', 'B2'],
         ['7:0:2', 'D3'],
         ['7:0:3', 'F3'],
-
         ['7:1:0', 'G2'],
         ['7:1:0', 'B2'],
         ['7:1:0', 'D3'],
         ['7:1:0', 'F3'],
- 
     ]
 };
 
@@ -496,15 +445,15 @@ const setNatureSounds = (input) => {
 
     switch (input) {
         case "wind":
-            backgroundImage.style.backgroundImage = 'url(./assets/wind-1.gif)'; break
+            backgroundImage.style.backgroundImage = 'url(./assets/gif/wind-1.gif)'; break
         case "rain":
-            backgroundImage.style.backgroundImage = 'url(./assets/rain.gif)'; break 
+            backgroundImage.style.backgroundImage = 'url(./assets/gif/rain.gif)'; break 
         case "river":
-            backgroundImage.style.backgroundImage = 'url(./assets/river-1.gif)'; break 
+            backgroundImage.style.backgroundImage = 'url(./assets/gif/river-1.gif)'; break 
         case "fireplace":
-            backgroundImage.style.backgroundImage = 'url(./assets/fireplace.gif)'; break
+            backgroundImage.style.backgroundImage = 'url(./assets/gif/fireplace.gif)'; break
         case "night":
-            backgroundImage.style.backgroundImage = 'url(./assets/midnight.gif)'; break
+            backgroundImage.style.backgroundImage = 'url(./assets/gif/midnight.gif)'; break
     }
 }
 
