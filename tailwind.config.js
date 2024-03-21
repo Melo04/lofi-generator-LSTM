@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'wind': "url('./assets/wind-1.gif')",
-        'fireplace': "url('./assets/fireplace-at.gif')",
-        'rain': "url('./assets/summer-1.gif')"
+        'wind': "url('./assets/gif/wind-1.gif')",
+        'fireplace': "url('./assets/gif/fireplace-at.gif')",
+        'rain': "url('./assets/gif/summer-1.gif')"
       }
     },
   },

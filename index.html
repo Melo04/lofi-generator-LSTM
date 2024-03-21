@@ -83,38 +83,24 @@
                     </div>
                 </form>
 
-                <form id='soloist' class="mt-4 hidden">
-                    <h3 class="form-heading enabled hidden mb-4 font-semibold text-black">AI Soloist</h3>
-                    <div class="flex flex-wrap">
-                        <div class="flex items-center me-4">
-                            <input type="radio" value='ai-true' name='ai' onchange="setAI('true')" class="form-input w-4 h-4 bg-gray-100 border-gray-300">
-                            <label for="red-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">on</label>
-                        </div>
-                        <div class="flex items-center me-4">
-                            <input type="radio" value='ai-false' name='ai' onchange="setAI('false')" checked class="form-input w-4 h-4 bg-gray-100 border-gray-300">
-                            <label for="green-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">off</label>
-                        </div>
-                    </div>
-                </form>
-
                 <div id='buttons-wrapper' class="my-5">
                     <button id='choose' type="button" onclick='enableChord()' class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 mr-2 focus:ring-2 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Choose a Song</button>
                     <button id='use-ai' type="button" onclick='enableAI()' class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-2 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Leverage LSTM</button>
                 </div>
 
-                <form id="ai-track" class="hidden mb-5">
+                <form id="lstm-track" class="hidden mb-5">
                     <div class="flex flex-wrap">
                         <div class="flex items-center me-4">
-                            <input type="radio" value="lofi_400_1" name="ai_track" onchange="setAITrack('lofi_400_1')" checked class="form-input w-4 h-4">
-                            <label for="red-radio" class="ms-2 text-md font-medium text-black"></label>
+                            <input type="radio" value="epochs_400" name="lstm" onchange="setLSTM('epochs_400')" checked class="form-input w-4 h-4">
+                            <label for="purple-radio" class="ms-2 text-md font-medium text-black">400 Epochs (Recommended)</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input type="radio" value="lofi_200_1" name="ai_track" onchange="setAITrack('lofi_200_1')" class="form-input w-4 h-4">
-                            <label for="green-radio" class="ms-2 text-md font-medium text-black"></label>
+                            <input type="radio" value="epochs_250" name="lstm" onchange="setLSTM('epochs_250')" class="form-input w-4 h-4">
+                            <label for="green-radio" class="ms-2 text-md font-medium text-black">300 Epochs</label>
                         </div>
                         <div class="flex items-center me-4">
-                            <input type="radio" value="lofi_400_2" name="ai_track" onchange="setAITrack('lofi_400_2')" class="form-input w-4 h-4">
-                            <label for="purple-radio" class="ms-2 text-md font-medium text-black"></label>
+                            <input type="radio" value="epochs_200" name="lstm" onchange="setLSTM('epochs_200')" class="form-input w-4 h-4">
+                            <label for="red-radio" class="ms-2 text-md font-medium text-black">200 Epochs</label>
                         </div>
                     </div>
                 </form>
@@ -137,8 +123,8 @@
                 </form>
 
                 <div id='buttons-wrapper'>
-                    <button id='start' type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 mr-2 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">&#x25B7; Play</button>
-                    <button id='stop' type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">&#x25A2; Stop</button>
+                    <button id='start' type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-2 focus:ring-purple-300 mr-2 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">&#x25B7; Play</button>
+                    <button id='stop' type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-2 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">&#x25A2; Stop</button>
                 </div>
 
                 <a href="https://melodykoh.vercel.app/blog/lofi-generator-lstm" class="font-medium mt-2 text-black underline hover:text-purple-600">how i made this →</a><br>

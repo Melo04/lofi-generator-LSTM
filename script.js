@@ -3,7 +3,7 @@ const stopButton = document.getElementById('stop');
 const chooseButton = document.getElementById('choose');
 const useAIButton = document.getElementById('use-ai');
 const chordButtons = document.querySelectorAll("#chords");
-const aiButtons = document.querySelectorAll('#ai-track');
+const aiButtons = document.querySelectorAll('#lstm-track');
 const soloAnalyzer = new Tone.Waveform;
 
 const naturePlayers = new Tone.Players({
@@ -70,15 +70,16 @@ const talkingPlayers = new Tone.Players({
     }
 });
 
-const aiPlayers = new Tone.Players({
+const lstmPlayers = new Tone.Players({
     urls: {
-        lofi_200_1: './assets/lofi-200-1.wav',
-        lofi_400_1: './assets/lofi-400-1.wav',
-        lofi_400_2: './assets/lofi-400-2.wav'
+        epochs_200: './assets/lstm_audio/epochs_200.wav',
+        epochs_250: './assets/lstm_audio/epochs_250.wav',
+        epochs_400: './assets/lstm_audio/epochs_400.wav'
     }
 });
 
 const chordsVol = new Tone.Volume(-5);
+// decay time, pre-delay, and wetness of the reverb effect
 const chordsReverb = new Tone.Reverb(1.5, 0.01, 0.8);
 chordSampler_bass.chain(chordsVol, chordsReverb, Tone.Destination);
 
@@ -97,7 +98,7 @@ guitarSampler.chain(guitarVol, guitarReverb, Tone.Destination);
 
 const aiVol = new Tone.Volume(-1);
 const aiReverb = new Tone.Reverb(1.5,0.01, 0.8);
-aiPlayers.chain(aiVol, Tone.Destination);
+lstmPlayers.chain(aiVol, Tone.Destination);
 
 const chordPatterns = {
     ylangYlang: [
@@ -329,23 +330,23 @@ const talkingPatterns = {
 };
 
 const aiPatterns = {
-    lofi_200_1: [
-        ['0:0:0', 'lofi_200_1']
+    epochs_200: [
+        ['0:0:0', 'epochs_200']
     ],
-    lofi_400_1: [
-        ['0:0:0', 'lofi_400_1']
+    epochs_250: [
+        ['0:0:0', 'epochs_250']
     ],
-    lofi_400_2: [
-        ['0:0:0', 'lofi_400_2']
+    epochs_400: [
+        ['0:0:0', 'epochs_400']
     ]
 }
 
-const patternDefaults = {
+const defaultPatterns = {
     chords: 'ylangYlang',
     drums: 'waterdrop',
     nature: 'wind',
     talking: 'chaos',
-    ai_track: 'lofi_400_1'
+    lstm: 'epochs_400'
 };
 
 const loadSoundPreferences = () => {
@@ -354,22 +355,21 @@ const loadSoundPreferences = () => {
     const natureSoundsSelected = JSON.parse(localStorage.getItem('nature'));
     const talkingSelected = JSON.parse(localStorage.getItem('talking'));
     const aiSelected = JSON.parse(localStorage.getItem('ai'));
-    const aiTrackSelected = JSON.parse(localStorage.getItem('ai_track'));
+    const aiTrackSelected = JSON.parse(localStorage.getItem('lstm'));
     const choiceChordSelected = JSON.parse(localStorage.getItem('enableChord'));
     const choiceAISelected = JSON.parse(localStorage.getItem('enableAI'));
   
-    const chords = chordsSelected ? chordsSelected : patternDefaults.chords;
+    const chords = chordsSelected ? chordsSelected : defaultPatterns.chords;
     const guitar = chords;
-    const drums = drumsSelected ? drumsSelected : patternDefaults.drums;
-    const nature = natureSoundsSelected ? natureSoundsSelected : patternDefaults.nature;
-    const talking = talkingSelected ? talkingSelected : patternDefaults.talking;
+    const drums = drumsSelected ? drumsSelected : defaultPatterns.drums;
+    const nature = natureSoundsSelected ? natureSoundsSelected : defaultPatterns.nature;
+    const talking = talkingSelected ? talkingSelected : defaultPatterns.talking;
     const ai = aiSelected ? aiSelected : 'false';
-    const ai_track = aiTrackSelected ? aiTrackSelected: patternDefaults.ai_track;
+    const lstm = aiTrackSelected ? aiTrackSelected: defaultPatterns.lstm;
     const enableChord = choiceChordSelected ? choiceChordSelected: false;
     const enableAI = choiceAISelected ? choiceAISelected: false;
 
-    const musicPrefsObject = { chords, guitar, drums, nature, talking, ai, ai_track, enableAI, enableChord }
-
+    const musicPrefsObject = { chords, guitar, drums, nature, talking, ai, lstm, enableAI, enableChord }
     return musicPrefsObject; 
 }
 
@@ -381,7 +381,7 @@ const playingState = () => {
 };
 
 const loadLoops = (selectedPatterns) => {
-    const { chords, drums, nature, talking, ai_track, enableAI, enableChord } = selectedPatterns;
+    const { chords, drums, nature, talking, lstm, enableAI, enableChord } = selectedPatterns;
     if (enableChord) {
         let chordPart = new Tone.Part((time, note) => {
             chordSampler_bass.triggerAttackRelease(note, 2.0, time);
@@ -412,8 +412,8 @@ const loadLoops = (selectedPatterns) => {
     
     if (enableAI) {
         let aiTrackPart = new Tone.Part((time, effect) => {
-            aiPlayers.player(effect).start(time);
-        }, aiPatterns[ai_track]).start();
+            lstmPlayers.player(effect).start(time);
+        }, aiPatterns[lstm]).start();
         aiTrackPart.loop = true;
         aiTrackPart.loopStart = 0;
         aiTrackPart.loopEnd = '60';
@@ -461,8 +461,8 @@ const setTalking = (input) => {
     localStorage.setItem('talking', JSON.stringify(input));
 }
 
-const setAITrack = (input) => {
-    localStorage.setItem('ai_track', JSON.stringify(input));
+const setLSTM = (input) => {
+    localStorage.setItem('lstm', JSON.stringify(input));
 }
 
 const disableForm = () => {
@@ -534,7 +534,7 @@ function windowResized() {
 }
 
 function draw() {
-    background('#c2b5a8');
+    background('#C4C4C4');
     const soloData = soloAnalyzer.getValue();
     const soloDataLength = soloData.length;
     strokeWeight(1);
