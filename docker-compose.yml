@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    container_name: lofi-generator
+    ports:
+      - "3000:80"

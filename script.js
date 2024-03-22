@@ -1,7 +1,7 @@
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 const chooseButton = document.getElementById('choose');
-const useAIButton = document.getElementById('use-ai');
+const useLSTM = document.getElementById('use-ai');
 const chordButtons = document.querySelectorAll("#chords");
 const aiButtons = document.querySelectorAll('#lstm-track');
 const soloAnalyzer = new Tone.Waveform;
@@ -377,7 +377,7 @@ const playingState = () => {
     disableForm();
     startButton.disabled = true;
     chooseButton.disabled = true;
-    useAIButton.disabled = true;
+    useLSTM.disabled = true;
 };
 
 const loadLoops = (selectedPatterns) => {
@@ -488,7 +488,7 @@ chooseButton.addEventListener('click', () => {
     }
 })
 
-useAIButton.addEventListener('click', () => {
+useLSTM.addEventListener('click', () => {
     for (i = 0; i < aiButtons.length; i++) {
         aiButtons[i].classList.remove('hidden');
         aiButtons[i].classList.add('flex');
